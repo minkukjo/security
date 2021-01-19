@@ -1,5 +1,6 @@
 package me.harry.security.infrastructure.security
 
+import me.harry.security.infrastructure.security.user.SecurityUserDetailService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
@@ -14,7 +15,7 @@ import javax.sql.DataSource
 @Configuration
 @Order(2)
 class WebSecurityConfiguration(
-        val dataSource: DataSource
+        val securityUserDetailService: SecurityUserDetailService
 ) : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity?) {
         http?.run {
@@ -33,8 +34,7 @@ class WebSecurityConfiguration(
 
     override fun configure(auth: AuthenticationManagerBuilder?) {
         auth?.run {
-            this.jdbcAuthentication()
-                    .dataSource(dataSource)
+            this.userDetailsService(securityUserDetailService)
                     .passwordEncoder(passwordEncoder())
         }
     }
