@@ -1,3 +1,11 @@
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: tlzbflxl
+    key-store-type: PKCS12
+    key-alias: tomcat
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
