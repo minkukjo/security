@@ -1,4 +1,4 @@
-package me.harry.security.infrastructure.security.user
+package me.harry.security.infrastructure.model
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails

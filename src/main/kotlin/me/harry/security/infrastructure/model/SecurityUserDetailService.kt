@@ -1,4 +1,4 @@
-package me.harry.security.infrastructure.security.user
+package me.harry.security.infrastructure.model
 
 import javassist.NotFoundException
 import me.harry.security.domain.User

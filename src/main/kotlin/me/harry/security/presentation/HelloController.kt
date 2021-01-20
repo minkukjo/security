@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RestController
 class HelloController {
 
     @GetMapping("/hello")
-    fun sayHello(name: String): String {
+    fun sayHello(name: String?): String {
         return "Hello $name"
     }
 
     @GetMapping("/admin/hello")
-    fun sayAdminHello(name: String): String {
+    fun sayAdminHello(name: String?): String {
         return "Hello Admin $name"
     }
 

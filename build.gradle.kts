@@ -47,6 +47,10 @@ dependencies {
 
     // WEB MVC
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation(group = "org.webjars", name = "bootstrap", version = "4.5.3")
+    implementation(group = "org.webjars.bower", name = "jquery", version = "3.5.1")
+    implementation(group = "org.webjars", name = "webjars-locator", version = "0.40")
     // SECURITY
     implementation("org.springframework.boot:spring-boot-starter-security")
     // DB
