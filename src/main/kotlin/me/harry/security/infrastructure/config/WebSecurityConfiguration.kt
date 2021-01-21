@@ -24,6 +24,8 @@ class WebSecurityConfiguration(
                     .anyRequest().authenticated() // 그 외 다른 API는 인증 요구
                     .and()
                     .formLogin().loginPage("/login").defaultSuccessUrl("/hello", true) // 로그인은 폼 로그인 방식으로 진행, 로그인이 성공하면 /hello로 이동
+                    .and().rememberMe().key("security_key")
+                    .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("remeber-me")
         }
     }
 
