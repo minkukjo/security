@@ -14,7 +14,6 @@ import org.springframework.security.web.authentication.www.DigestAuthenticationF
 @Configuration
 @Order(1)
 class AdminSecurityConfiguration(
-        val passwordEncoder: PasswordEncoder
 ) : WebSecurityConfigurerAdapter() {
 
     @Bean
@@ -26,11 +25,11 @@ class AdminSecurityConfiguration(
         auth?.run {
             this.inMemoryAuthentication()
                     .withUser("digestharry")
-                    .password(passwordEncoder.encode("digestsecret"))
+                    .password(passwordEncoder().encode("digestsecret"))
                     .roles("USER")
                     .and()
                     .withUser("admin")
-                    .password(passwordEncoder.encode("adminsecret"))
+                    .password(passwordEncoder().encode("adminsecret"))
                     .roles("ADMIN")
         }
     }

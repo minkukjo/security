@@ -1,8 +1,10 @@
 package me.harry.security.infrastructure.config
 
 import me.harry.security.infrastructure.model.SecurityUserDetailService
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Scope
 import org.springframework.core.annotation.Order
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -11,11 +13,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler
 
 @Configuration
 @Order(2)
 class WebSecurityConfiguration(
-        val securityUserDetailService: SecurityUserDetailService
+        val securityUserDetailService: SecurityUserDetailService,
+        @Qualifier(value = "oauth2authSuccessHandler")
+        val oauth2authSuccessHandler: AuthenticationSuccessHandler
 ) : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity?) {
         http?.run {
@@ -26,6 +31,7 @@ class WebSecurityConfiguration(
                     .formLogin().loginPage("/login").defaultSuccessUrl("/hello", true) // 로그인은 폼 로그인 방식으로 진행, 로그인이 성공하면 /hello로 이동
                     .and().rememberMe().key("security_key")
                     .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("remeber-me")
+                    .and().oauth2Login().loginPage("/login").successHandler(oauth2authSuccessHandler)
         }
     }
 
@@ -35,15 +41,14 @@ class WebSecurityConfiguration(
         }
     }
 
-    @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder() as DelegatingPasswordEncoder
-    }
-
     override fun configure(auth: AuthenticationManagerBuilder?) {
         auth?.run {
             this.userDetailsService(securityUserDetailService)
                     .passwordEncoder(passwordEncoder())
         }
     }
+}
+
+fun passwordEncoder(): PasswordEncoder {
+    return PasswordEncoderFactories.createDelegatingPasswordEncoder() as DelegatingPasswordEncoder
 }

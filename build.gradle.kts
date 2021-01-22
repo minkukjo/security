@@ -53,6 +53,7 @@ dependencies {
     implementation(group = "org.webjars", name = "webjars-locator", version = "0.40")
     // SECURITY
     implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
     // DB
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("mysql:mysql-connector-java")
