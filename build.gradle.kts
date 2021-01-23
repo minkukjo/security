@@ -54,6 +54,7 @@ dependencies {
     // SECURITY
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+    implementation("org.springframework.security.experimental:spring-security-oauth2-authorization-server:0.0.3")
     // DB
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("mysql:mysql-connector-java")
