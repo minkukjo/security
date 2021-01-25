@@ -32,7 +32,6 @@ class AuthorizationServerConfiguration {
                 .tokenSettings {
 //                    it.enableRefreshTokens(false) // 이 옵션은 디폴트로 true이며 false를 주면 리프레시 토큰을 주지 않는다.
                     it.accessTokenTimeToLive(Duration.ofHours(1)) // 토큰 만료 시간
-                     
                 }
                 .scope("test")
                 .build()
